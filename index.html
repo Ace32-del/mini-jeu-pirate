@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chasse au Trésor</title>
+    <style>
+        body {
+            background-color: #0b1a2d;
+            color: white;
+            text-align: center;
+            font-family: Arial;
+        }
+        button {
+            padding: 15px;
+            margin: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🏴‍☠️ Chasse au Trésor Pirate 🏴‍☠️</h1>
+<p>Tu as 3 essais pour trouver le trésor !</p>
+
+<div id="game"></div>
+<div id="message"></div>
+
+<script>
+    let tresor = Math.floor(Math.random() * 10) + 1;
+    let essais = 3;
+    let gameDiv = document.getElementById("game");
+    let message = document.getElementById("message");
+
+    for (let i = 1; i <= 10; i++) {
+        let btn = document.createElement("button");
+        btn.innerText = i;
+        btn.onclick = function() {
+            if (essais <= 0) return;
+
+            if (i === tresor) {
+                message.innerHTML = "💰 BRAVO ! Tu as trouvé le trésor !";
+                essais = 0;
+            } else {
+                essais--;
+                if (essais > 0) {
+                    message.innerHTML = "❌ Mauvais choix ! Il te reste " + essais + " essais.";
+                } else {
+                    message.innerHTML = "💀 Perdu ! Le trésor était en case " + tresor;
+                }
+            }
+        };
+        gameDiv.appendChild(btn);
+    }
+</script>
+
+</body>
+</html>
